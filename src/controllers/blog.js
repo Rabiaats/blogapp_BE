@@ -7,6 +7,7 @@
 // Call Models:
 const { Blog } = require("../models/blog");
 const { NotFoundError } = require("../errors/customError");
+const { error } = require("console");
 
 /* ------------------------------------------------------- */
 
@@ -91,10 +92,36 @@ module.exports = {
         }
 
         res.status(result.deletedCount ? 204 : 404).send({
-            error: true,
+            isError: true,
             message: 'Something went wrong, data might be deleted already.'
         });
     },
+
+    getLike: async (req, res) => {
+        const data = await Blog.findOne({ _id: req.params.id });
+
+        res.status(data.likes ? 200 : 404).send({
+            isError: data.likes ? false : true,
+            data: data.likes
+        })
+    },
+
+    postLike: async (req, res) => {
+        const data = await Blog.findOne({ _id: req.params.id });
+
+        if (!data.likes.find(id =>  id == res.user._id)){
+            data.likes.push(res.user._id);
+            res.status(200).send({
+                isError: false,
+                data
+            })
+        }else{
+            data.likes = data.likes.map(id => id != res.user._id);
+            res.status(200).send({
+                isError: false,
+            })
+        }
+    }
 };
 
 /* ------------------------------------------------------- */
