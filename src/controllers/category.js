@@ -1,7 +1,5 @@
 "use strict"
-/* -------------------------------------------------------
-    | FULLSTACK TEAM | NODEJS / EXPRESS |
-------------------------------------------------------- */
+
 
 const Category = require('../models/category');
 

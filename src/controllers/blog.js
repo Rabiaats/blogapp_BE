@@ -5,7 +5,8 @@
 ------------------------------------------------------- */
 
 // Call Models:
-const { Blog } = require("../models/blog");
+const Blog  = require("../models/blog");
+const Comment  = require("../models/comment");
 const { NotFoundError } = require("../errors/customError");
 const { error } = require("console");
 
@@ -16,7 +17,7 @@ module.exports = {
     list: async (req, res) => {
 
         // Moved to middleware:
-        const data = await res.getModelList(Blog, ['userId', 'categoryId'])
+        const data = await res.getModelList(Blog, ['userId', 'categoryId']);
 
         res.send({
             details: await res.getModelListDetails(Blog),
@@ -39,13 +40,18 @@ module.exports = {
     },
 
     read: async (req, res) => {
-        const result = await Blog.findOne({ _id: req.params.id }).populate([
+        const blog = await Blog.findOne({ _id: req.params.id }).populate([
             {path: 'userId', select: 'firstName lastName'},
             {path: 'categoryId', select: 'name'}
         ]);
         if (!result) {
             throw new NotFoundError("No matching documents found");
-        }
+        };
+
+        const comments = await res.getModelList(Comment, {blogId: req.params.id}, ['userId', 'categoryId']);
+
+        const result = {blog,comments}
+
 
         const isUser = result.countOfVisitors.map((userId) => userId == req.user._id);
 
