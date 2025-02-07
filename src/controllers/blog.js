@@ -16,13 +16,33 @@ module.exports = {
 
     list: async (req, res) => {
 
-        // Moved to middleware:
-        const data = await res.getModelList(Blog, ['userId', 'categoryId']);
-
-        res.send({
-            details: await res.getModelListDetails(Blog),
-            result: data,
-        });
+        if (req.query.author) {
+            const data = await Blog.find({ userId: req.query.author }).populate([
+              { path: "userId", select: "firstName lastName image" },
+            ]);
+    
+          res.status(200).send({
+            error: false,
+            details: await res.getModelListDetails(Blog, {
+              userId: req.query.author,
+            }),
+            data,
+          });
+        } else {
+          const data = await res.getModelList(Blog, { isPublish: true }, [
+            "categoryId",
+            {
+              path: "userId",
+              select: "firstName lastName image",
+            }
+          ]);
+    
+          res.status(200).send({
+            error: false,
+            details: await res.getModelListDetails(Blog, { isPublish: true }),
+            data,
+          });
+        }
     },
 
     // CRUD ->
@@ -41,7 +61,7 @@ module.exports = {
 
     read: async (req, res) => {
         const blog = await Blog.findOne({ _id: req.params.id }).populate([
-            {path: 'userId', select: 'firstName lastName'},
+            {path: 'userId', select: 'firstName lastName image'},
             {path: 'categoryId', select: 'name'}
         ]);
         if (!result) {

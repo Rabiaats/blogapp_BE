@@ -1,5 +1,6 @@
 "use strict";
 
+const { type } = require('os');
 const { mongoose } = require('../configs/dbConnection');
 const passwordEncrypt = require('../helpers/passwordEncrypt');
 
@@ -37,6 +38,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: true,
+    },
+
+    image: {
+        type: String,
+        trim: true,
+        required: true
     },
 
     isActive: {
