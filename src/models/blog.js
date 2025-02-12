@@ -40,14 +40,22 @@ const BlogSchema = new mongoose.Schema({
         default:false
     },
     
-    likes:{
-        type:Array,
-        default:[]
+    likes:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        }
+    ],
+
+    visitors: {
+        type:[]
     },
     
     countOfVisitors:{
-        type:Array,
-        default:[]
+        type: Number,
+        get: function (){
+            return this.visitors.length;
+        }
     },
 
 }, {
