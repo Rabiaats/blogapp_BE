@@ -39,21 +39,4 @@ module.exports = {
             throw new Error('NoPermission: You must login and to be Admin.')
         }
     },
-
-    isStaff: (req, res, next) => {
-
-        // Set Passive:
-        return next()
-        
-        // only Admin or Staff:
-        if (req.user && req.user.isActive && (req.user.isAdmin || req.user.isStaff)) {
-
-            next()
-
-        } else {
-
-            res.errorStatusCode = 403
-            throw new Error('NoPermission: You must login and to be Staff.')
-        }
-    },
 }
