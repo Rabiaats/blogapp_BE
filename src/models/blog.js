@@ -20,13 +20,17 @@ const BlogSchema = new mongoose.Schema({
         type:String,
         trim:true,
         unique:true,
-        required:true
+        required:true,
+        minlength: 10,
+        maxlength: 60
     },
 
     content: {
         type: String,
         trim: true,
         required: true,
+        minlength: 100,
+        maxlength: 5000
     },
 
     image:{
@@ -44,6 +48,13 @@ const BlogSchema = new mongoose.Schema({
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
+        }
+    ],
+
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment'
         }
     ],
 
