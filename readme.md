@@ -1,6 +1,6 @@
 # BLOG API
 
-![Backend_Link](https://blogapp-be-1bec.onrender.com/)
+[Backend_Link](https://blogapp-be-1bec.onrender.com)
 
 ### ERD:
 
