@@ -51,11 +51,6 @@ const UserSchema = new mongoose.Schema({
         default: true
     },
 
-    isStaff: {
-        type: Boolean,
-        default: false
-    },
-
     isAdmin: {
         type: Boolean,
         default: false
