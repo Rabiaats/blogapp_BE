@@ -328,7 +328,11 @@
     },
     "/blogs/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "List Blogs",
+        "description": "\r  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>\r   <li>URL/?<b>limit=10&page=1</b></li>\r  </ul>\r  ",
         "parameters": [
           {
             "name": "author",
@@ -343,6 +347,10 @@
         }
       },
       "post": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Create Blog",
         "description": "",
         "parameters": [
           {
@@ -355,7 +363,8 @@
                   "example": "any"
                 }
               }
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -367,6 +376,10 @@
     },
     "/blogs/{id}": {
       "get": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Get Single Blog",
         "description": "",
         "parameters": [
           {
@@ -383,6 +396,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Update Blog",
         "description": "",
         "parameters": [
           {
@@ -401,7 +418,8 @@
                   "example": "any"
                 }
               }
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -414,6 +432,10 @@
         }
       },
       "delete": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Delete Blog",
         "description": "",
         "parameters": [
           {
@@ -421,18 +443,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "userId": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -445,6 +455,10 @@
         }
       },
       "patch": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Update Blog",
         "description": "",
         "parameters": [
           {
@@ -463,7 +477,8 @@
                   "example": "any"
                 }
               }
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -478,6 +493,10 @@
     },
     "/blogs/{id}/postLike": {
       "post": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Add/Remove Like",
         "description": "",
         "parameters": [
           {
@@ -490,6 +509,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
