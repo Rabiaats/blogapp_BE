@@ -628,24 +628,29 @@
       }
     },
     "/comments/": {
-      "get": {
-        "tags": [
-          "Comments"
-        ],
-        "summary": "List Comments",
-        "description": "\r  You can send query with endpoint for search[], sort[], page and limit.\r  <ul> Examples:\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r   <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
       "post": {
         "tags": [
           "Comments"
         ],
         "summary": "Create Comment",
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                },
+                "blogId": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -671,6 +676,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -691,6 +699,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -734,6 +745,9 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
