@@ -6,7 +6,6 @@
 
 // Call Models:
 const Blog  = require("../models/blog");
-const Comment  = require("../models/comment");
 const { NotFoundError } = require("../errors/customError");
 const requestIP = require("request-ip");
 const encrypt = require("../helpers/passwordEncrypt");
