@@ -870,10 +870,6 @@
               "type": "boolean",
               "example": true
             },
-            "minlength": {
-              "type": "number",
-              "example": 10
-            },
             "maxlength": {
               "type": "number",
               "example": 60
@@ -893,10 +889,6 @@
             "required": {
               "type": "boolean",
               "example": true
-            },
-            "minlength": {
-              "type": "number",
-              "example": 100
             },
             "maxlength": {
               "type": "number",
@@ -1062,6 +1054,10 @@
             "unique": {
               "type": "boolean",
               "example": true
+            },
+            "maxlength": {
+              "type": "number",
+              "example": 100
             }
           }
         }

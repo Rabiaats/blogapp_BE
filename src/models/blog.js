@@ -21,7 +21,6 @@ const BlogSchema = new mongoose.Schema({
         trim:true,
         unique:true,
         required:true,
-        minlength: 10,
         maxlength: 60
     },
 
@@ -29,7 +28,6 @@ const BlogSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        minlength: 100,
         maxlength: 5000
     },
 
