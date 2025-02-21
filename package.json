@@ -1,8 +1,8 @@
 {
-  "title": "Stock Management API",
-  "name": "stockapi",
+  "title": "Blog API",
+  "name": "blogapi",
   "version": "1.0.0",
-  "description": "Stock Management System",
+  "description": "Blog API",
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
@@ -10,7 +10,7 @@
     "dev": "node swaggerAutogen && nodemon index.js"
   },
   "keywords": [],
-  "author": "CourseName",
+  "author": "Rabia",
   "license": "ISC Licence",
   "dependencies": {
     "dotenv": "^16.3.1",

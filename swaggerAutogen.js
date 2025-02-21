@@ -41,11 +41,10 @@ const document = {
 	definitions: {
 		// Models:
 		"User": require('./src/models/user').schema.obj,
-		"Blog": require('./src/models/brand').schema.obj,
+		"Blog": require('./src/models/blog').schema.obj,
 		"Category": require('./src/models/category').schema.obj,
-		"Comment": require('./src/models/firm').schema.obj,
-		"Auth": require('./src/models/product').schema.obj,
-		"Token": require('./src/models/purchase').schema.obj,
+		"Comment": require('./src/models/comment').schema.obj,
+		"Token": require('./src/models/token').schema.obj,
 	}
 }
 

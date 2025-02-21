@@ -31,15 +31,7 @@ module.exports = {
     // CRUD:
     create: async (req, res) => {
         /* 
-            #swagger.tags = ["Categories"]
-            #swagger.summary = "Create Category"
-            #swagger.parameters['body'] = {
-                in:'body',
-                required:true,
-                schema:{
-                    $ref"#/definitions/Category"
-                }
-            }
+            #swagger.ignore = true
         */
 
         const data = await Category.create(req.body)
@@ -66,15 +58,7 @@ module.exports = {
 
     update: async (req, res) => {
         /* 
-            #swagger.tags = ["Categories"]
-            #swagger.summary = "Update Category"
-            #swagger.parameters['body'] = {
-                in:'body',
-                required:true,
-                schema:{
-                    $ref"#/definitions/Category"
-                }
-            }
+            #swagger.ignore = true
         */
 
         const data = await Category.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
@@ -89,8 +73,7 @@ module.exports = {
 
     deletee: async (req, res) => {
         /* 
-            #swagger.tags = ["Categories"]
-            #swagger.summary = "Delete Single Category"
+            #swagger.ignore = true
         */
 
         const data = await Category.deleteOne({ _id: req.params.id })
