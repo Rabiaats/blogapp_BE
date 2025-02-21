@@ -3,7 +3,7 @@
 const router = require('express').Router()
 
 const { list, create, read, update, deletee } = require('../controllers/user');
-const { isLogin, isAdmin, isStaff } = require('../middlewares/permissions')
+const { isLogin, isAdmin} = require('../middlewares/permissions')
 // URL: /users
 
 

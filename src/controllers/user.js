@@ -4,6 +4,7 @@
 ------------------------------------------------------- */
 
 const passwordEncrypt = require('../helpers/passwordEncrypt');
+const sendMail = require('../helpers/sendMail')
 const token = require('../models/token');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
