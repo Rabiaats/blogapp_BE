@@ -31,18 +31,10 @@ module.exports = {
 
         if (req.query.author) {
             const data = await Blog.find({ userId: req.query.author }).populate([
-              "categoryId",
                 {
                   path: "userId",
                   select: "firstName lastName image",
-                },
-                {
-                  path: "comments",
-                  populate: {
-                    path: "userId",
-                    select: "firstName lastName image",
-                  },
-                },
+                }
             ]);
     
           res.status(200).send({
@@ -58,14 +50,7 @@ module.exports = {
                 {
                   path: "userId",
                   select: "firstName lastName image",
-                },
-                {
-                  path: "comments",
-                  populate: {
-                    path: "userId",
-                    select: "firstName lastName image",
-                  },
-                },
+                }
               ]);
     
           res.status(200).send({
@@ -104,6 +89,7 @@ module.exports = {
             #swagger.tags = ["Blogs"]
             #swagger.summary = "Get Single Blog"
         */
+       
 
         const ip = encrypt(requestIP.getClientIp(req));
 
@@ -111,7 +97,7 @@ module.exports = {
             { _id: req.params.id },
             { $addToSet: { visitors: ip } },
             { new: true }
-          ).populate(
+          ).populate([
             {
               path: "userId",
               select: "username firstName lastName image",
@@ -124,7 +110,7 @@ module.exports = {
                 select: "username firstName lastName image",
               },
             }
-          );
+          ]);
 
         res.send({
             isError: false,

@@ -23,12 +23,12 @@ module.exports = async function () {
     {
         "_id": "67b8829c19bb73bb459f3da9",
         "username": "user1",
-        "password": "Furtunam.7"
+        "password": "User1123.7"
     }
     {
         "_id": "67b882c619bb73bb459f3dae",
         "username": "user2",
-        "password": "Furtunam.7"
+        "password": "User2123.7"
     }
 
     /* Category *
@@ -165,6 +165,23 @@ module.exports = async function () {
       "updatedAt": "2025-02-21T13:52:51.717Z",
       "__v": 0
     }
+
+    /* Blog *
+    "userId": "67b882237fdd3cff30523c72",
+    "categoryId": "67b884fc19bb73bb459f3df4",
+    "title": "Deneme Blog",
+    "content": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
+    "image": "https://images.pexels.com/photos/262508/pexels-photo-262508.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "isPublish": true,
+    "likes": [],
+    "comments": [],
+    "visitors": [],
+    "_id": "67b88d695d0482cf142bc002",
+    "createdAt": "2025-02-21T14:27:53.976Z",
+    "updatedAt": "2025-02-21T14:27:53.976Z",
+    "__v": 0
+  }
+
     /* Finished */
     console.log('* Synchronized.')
 }
