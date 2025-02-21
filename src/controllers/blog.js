@@ -83,6 +83,9 @@ module.exports = {
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
+                schema: {
+                    $ref"#/definitions/Blog"
+                    }
             }
         */
 
@@ -136,6 +139,9 @@ module.exports = {
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
+                schema: {
+                    $ref"#/definitions/Blog"
+                    }
             }
         */
 

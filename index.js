@@ -11,6 +11,7 @@ const app = express()
 // envVariables to process.env:
 require('dotenv').config()
 const PORT = process.env?.PORT || 8000
+const HOST = process.env?.HOST || "127.0.0.1"
 
 // asyncErrors to errorHandler:
 require('express-async-errors')
@@ -66,7 +67,7 @@ app.use(require('./src/routes'))
 app.use(require('./src/middlewares/errorHandler'))
 
 // RUN SERVER:
-app.listen(PORT, () => console.log(`${PORT}`))
+app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`))
 
 /* ------------------------------------------------------- */
 // Syncronization (must be in commentLine):
