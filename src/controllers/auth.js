@@ -22,14 +22,14 @@ module.exports = {
            }
        */
 
-        const { username, email, password } = req.body
+        const { email, password } = req.body
 
-        if (!((username || email) && password)) {
+        if (!((email) && password)) {
             res.errorStatusCode = 401;
             throw new Error('Please enter username/email and password.');
         }
 
-        const user = await User.findOne({ $or: [{ email }, { username }] })
+        const user = await User.findOne({ $or: [ email ] })
 
         if ((!user & user.password !== passwordEncrypt(password))) {
             res.errorStatusCode = 401
