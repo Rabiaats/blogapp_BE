@@ -29,7 +29,7 @@ module.exports = {
             throw new Error('Please enter username/email and password.');
         }
 
-        const user = await User.findOne({ $or: [ email ] })
+        const user = await User.findOne(email)
 
         if ((!user & user.password !== passwordEncrypt(password))) {
             res.errorStatusCode = 401

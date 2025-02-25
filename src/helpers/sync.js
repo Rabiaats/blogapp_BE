@@ -3,6 +3,8 @@
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
 // sync():
+const User = require("../models/user");
+
 
 module.exports = async function () {
 
@@ -13,6 +15,19 @@ module.exports = async function () {
     await mongoose.connection.dropDatabase()
     console.log('- Database and all data DELETED!')
     /* REMOVE DATABASE */
+
+    await User.create([
+      {
+        username: "admin",
+        email: "atesr782@gmail.com",
+        password: "Admin123.7",
+        firstName: "Admin",
+        lastName: "Admin",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOPxy0H3YXiw5KwQHB0yViJWfSEz4AvmNMcg&s",
+        isAdmin: true,
+        isActive: true,
+      },
+    ]);
 
     /* User *
     {
