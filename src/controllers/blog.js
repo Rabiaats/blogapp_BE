@@ -30,7 +30,7 @@ module.exports = {
         */
 
         if (req.query.author) {
-            const data = await Blog.find({ userId: req.query.author }).populate([
+            const data = await Blog.find({ userId: req.query.author }).sort({createdAt: 'desc'}).populate([
                 {
                   path: "userId",
                   select: "firstName lastName image",
