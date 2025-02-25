@@ -4,6 +4,7 @@
 ------------------------------------------------------- */
 // sync():
 const User = require("../models/user");
+const Category = require("../models/category");
 
 
 module.exports = async function () {
@@ -16,18 +17,18 @@ module.exports = async function () {
     console.log('- Database and all data DELETED!')
     /* REMOVE DATABASE */
 
-    await User.create([
-      {
-        username: "admin",
-        email: "atesr782@gmail.com",
-        password: "Admin123.7",
-        firstName: "Admin",
-        lastName: "Admin",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOPxy0H3YXiw5KwQHB0yViJWfSEz4AvmNMcg&s",
-        isAdmin: true,
-        isActive: true,
-      },
-    ]);
+    // await User.create([
+    //   {
+    //     username: "admin",
+    //     email: "atesr782@gmail.com",
+    //     password: "Admin123.7",
+    //     firstName: "Admin",
+    //     lastName: "Admin",
+    //     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOPxy0H3YXiw5KwQHB0yViJWfSEz4AvmNMcg&s",
+    //     isAdmin: true,
+    //     isActive: true,
+    //   },
+    // ]);
 
     /* User *
     {
@@ -45,6 +46,39 @@ module.exports = async function () {
         "username": "user2",
         "password": "User2123.7"
     }
+*/
+
+const categories = [
+  "World",
+  "Technology",
+  "Design",
+  "Culture",
+  "Business",
+  "Politics",
+  "Science",
+  "Health",
+  "Travel",
+  "Life Style",
+  "Fitness",
+  "Fashion",
+  "Food",
+  "Music",
+  "DIY",
+  "Sport",
+  "Finance",
+  "Parent",
+  "Personal",
+  "Movie",
+  "Car",
+  "News",
+  "Pet",
+  "Software"
+];
+
+    for (let category of categories) {
+    await Category.create({
+      name: category,
+    })}
 
     /* Category *
     {
