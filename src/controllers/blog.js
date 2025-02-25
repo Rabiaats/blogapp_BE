@@ -45,7 +45,7 @@ module.exports = {
             data,
           });
         } else {
-            const data = await res.getModelList(Blog, { isPublish: true }, [
+            const data = await Blog.find({ isPublish: true }).sort({createdAt: 'desc'}).populate([
                 "categoryId",
                 {
                   path: "userId",
@@ -55,7 +55,6 @@ module.exports = {
     
           res.status(200).send({
             error: false,
-            details: await res.getModelListDetails(Blog, { isPublish: true }),
             data,
           });
         }
