@@ -136,20 +136,7 @@ module.exports = {
             { _id: req.params.id },
             req.body,
             {runValidators:true}
-          ).populate(
-            {
-              path: "userId",
-              select: "username firstName lastName image",
-            },
-            {
-              path: "comments",
-              select: "_id comment blogId updatedAt",
-              populate: {
-                path: "userId",
-                select: "username firstName lastName image",
-              },
-            }
-          );
+          )
 
         if (result.matchedCount > 0 && result.modifiedCount === 0) {
           return res.status(200).send({ message: "Document already up-to-date." });
