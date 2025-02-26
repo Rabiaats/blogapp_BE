@@ -30,7 +30,7 @@ module.exports = {
         */
 
         if (req.query.author) {
-            const data = await Blog.find({ userId: req.query.author }).sort({createdAt: 'desc'}).populate([
+            const result = await Blog.find({ userId: req.query.author }).sort({createdAt: 'desc'}).populate([
                 {
                   path: "userId",
                   select: "firstName lastName image",
@@ -42,10 +42,10 @@ module.exports = {
             details: await res.getModelListDetails(Blog, {
               userId: req.query.author,
             }),
-            data,
+            result,
           });
         } else {
-            const data = await Blog.find({ isPublish: true }).sort({createdAt: 'desc'}).populate([
+            const result = await Blog.find({ isPublish: true }).sort({createdAt: 'desc'}).populate([
                 "categoryId",
                 {
                   path: "userId",
@@ -55,7 +55,7 @@ module.exports = {
     
           res.status(200).send({
             error: false,
-            data,
+            result,
           });
         }
     },
@@ -132,7 +132,7 @@ module.exports = {
 
         if (!req.user.isAdmin) req.body.userId = req.user._id;
 
-        const result = await Blog.updateOne(
+        const data = await Blog.updateOne(
             { _id: req.params.id },
             req.body,
             {runValidators:true}
@@ -144,8 +144,21 @@ module.exports = {
 
         res.status(202).send({
             isError: false,
-            result,
-            new: await Blog.findOne({ _id: req.params.id }),
+            data,
+            result: await Blog.findOne({ _id: req.params.id }).populate([
+              {
+                path: "userId",
+                select: "username firstName lastName image",
+              },
+              {
+                path: "comments",
+                select: "_id comment blogId updatedAt",
+                populate: {
+                  path: "userId",
+                  select: "username firstName lastName image",
+                },
+              }
+            ]),
         });
     },
 
