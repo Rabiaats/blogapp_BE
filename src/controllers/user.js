@@ -25,12 +25,12 @@ module.exports = {
             `
         */
 
-        const data = await res.getModelList(User)
+        const result = await res.getModelList(User)
 
         res.status(200).send({
             error: false,
             details: await res.getModelListDetails(User),
-            data
+            result
         })
     },
 
@@ -52,35 +52,35 @@ module.exports = {
             }
         */
 
-        const data = await User.create(req.body);
+        const result = await User.create(req.body);
 
     
         sendMail(
-            data.email,
+            result.email,
             'Wellcome to My Blog App',
             `
                 <h1>Welcome</h1>
-                <h2>${data.username}</h2>
+                <h2>${result.username}</h2>
                 <p>Welcome to My Blog App</p>
             `
             )
 
         /* Auth Login */
         // Simple Token:
-        const tokenData = await token.create({
-            userId: data._id,
-            token: passwordEncrypt(data._id + Date.now())
+        const tokenresult = await token.create({
+            userId: result._id,
+            token: passwordEncrypt(result._id + Date.now())
         })
 
         // JWT:
-        const accessToken = jwt.sign(data.toJSON(), process.env.ACCESS_KEY, { expiresIn: process.env.ACCESS_EXP })
-        const refreshToken = jwt.sign({ _id: data._id, password: data.password }, process.env.REFRESH_KEY, { expiresIn: process.env.REFRESH_EXP })
+        const accessToken = jwt.sign(result.toJSON(), process.env.ACCESS_KEY, { expiresIn: process.env.ACCESS_EXP })
+        const refreshToken = jwt.sign({ _id: result._id, password: result.password }, process.env.REFRESH_KEY, { expiresIn: process.env.REFRESH_EXP })
 
         res.status(200).send({
             error: false,
-            token: tokenData.token,
+            token: tokenresult.token,
             bearer: { accessToken, refreshToken },
-            data
+            result
         })
     },
 
@@ -93,11 +93,11 @@ module.exports = {
 
         if (!req.user.isAdmin) req.params.id = req.user._id;
 
-        const data = await User.findOne({ _id: req.params.id });
+        const result = await User.findOne({ _id: req.params.id });
 
         res.status(200).send({
             error: false,
-            data
+            result
         })
     },
 
@@ -120,12 +120,12 @@ module.exports = {
 
         if (!req.user.isAdmin) req.params.id = req.user._id;
 
-        const data = await User.updateOne({ _id: req.params.id }, req.body, { runValidators: true });
+        const result = await User.updateOne({ _id: req.params.id }, req.body, { runValidators: true });
 
 
         res.status(202).send({
             error: false,
-            data,
+            result,
             new: await User.findOne({ _id: req.params.id })
         })
     },
@@ -138,9 +138,9 @@ module.exports = {
 
         if (!req.user.isAdmin) req.params.id = req.user._id;
 
-        const data = await User.deleteOne({ _id: req.params.id });
+        const result = await User.deleteOne({ _id: req.params.id });
 
-        res.status(data.deletedCount ? 204 : 404).send({
+        res.status(result.deletedCount ? 204 : 404).send({
             error: true,
             message: 'Something went wrong, data might be deleted already.'
         })

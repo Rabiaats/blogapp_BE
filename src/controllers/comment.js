@@ -21,12 +21,12 @@ module.exports = {
     //         `
     //     */
 
-    //     const data = await res.getModelList(Comment)
+    //     const result = await res.getModelList(Comment)
 
     //     res.status(200).send({
     //         error: false,
     //         details: await res.getModelListDetails(Comment),
-    //         data
+    //         result
     //     })
     // },
 
@@ -47,7 +47,7 @@ module.exports = {
 
         const comment = await Comment.create(req.body);
 
-        const data =  await Comment.findById(comment._id).populate({
+        const result =  await Comment.findById(comment._id).populate({
             path: "userId",
             select: "username firstName lastName image",
         });
@@ -56,7 +56,7 @@ module.exports = {
 
         res.status(201).send({
             error: false,
-            data
+            result
         })
     },
 
@@ -66,11 +66,11 @@ module.exports = {
            #swagger.summary = "Get Single Comment"
         */
 
-        const data = await Comment.findOne({ _id: req.params.id }).populate([
+        const result = await Comment.findOne({ _id: req.params.id }).populate([
             { path: "userId", select: "firstName lastName image username" },
           ]);
 
-          if (!data) {
+          if (!result) {
             return res.status(404).send({
               error: true,
               message: "Comment not found",
@@ -79,7 +79,7 @@ module.exports = {
 
         res.status(200).send({
             error: false,
-            data
+            result
         })
     },
 
@@ -96,9 +96,9 @@ module.exports = {
             }
         */
 
-        const data = await Comment.findOneAndUpdate({ _id: req.params.id }, req.body, { runValidators: true })
+        const result = await Comment.findOneAndUpdate({ _id: req.params.id }, req.body, { runValidators: true })
 
-        if (!data) {
+        if (!result) {
             return res.status(404).send({
               error: true,
               message: "Comment not found",
@@ -108,7 +108,7 @@ module.exports = {
 
         res.status(202).send({
             error: false,
-            data,
+            result,
         })
     },
 
@@ -118,20 +118,20 @@ module.exports = {
             #swagger.summary = "Delete Single Comment"
         */
 
-        const data = await Comment.findOneAndDelete({ _id: req.params.id })
+        const result = await Comment.findOneAndDelete({ _id: req.params.id })
 
-        if (!data) {
+        if (!result) {
             return res.status(404).send({
               error: true,
               message: "Comment not found",
             });
           };
 
-        await Blog.findByIdAndUpdate(data.blogId, {
+        await Blog.findByIdAndUpdate(result.blogId, {
             $pull: { comments: req.params.id },
         });
 
-        res.status(data ? 204 : 404).send({
+        res.status(result ? 204 : 404).send({
             error: true,
             message: 'Something went wrong, data might be deleted already.'
         })

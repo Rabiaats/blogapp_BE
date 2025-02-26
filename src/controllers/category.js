@@ -19,12 +19,12 @@ module.exports = {
             `
         */
 
-        const data = await res.getModelList(Category)
+        const result = await res.getModelList(Category)
 
         res.status(200).send({
             error: false,
             details: await res.getModelListDetails(Category),
-            data
+            result
         })
     },
 
@@ -34,11 +34,11 @@ module.exports = {
             #swagger.ignore = true
         */
 
-        const data = await Category.create(req.body)
+        const result = await Category.create(req.body)
 
         res.status(201).send({
             error: false,
-            data
+            result
         })
     },
 
@@ -48,11 +48,11 @@ module.exports = {
            #swagger.summary = "Get Single Category"
         */
 
-        const data = await Category.findOne({ _id: req.params.id })
+        const result = await Category.findOne({ _id: req.params.id })
 
         res.status(200).send({
             error: false,
-            data
+            result
         })
     },
 
@@ -61,12 +61,12 @@ module.exports = {
             #swagger.ignore = true
         */
 
-        const data = await Category.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
+        const result = await Category.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
 
 
         res.status(202).send({
             error: false,
-            data,
+            result,
             new: await Category.findOne({ _id: req.params.id })
         })
     },
@@ -76,9 +76,9 @@ module.exports = {
             #swagger.ignore = true
         */
 
-        const data = await Category.deleteOne({ _id: req.params.id })
+        const result = await Category.deleteOne({ _id: req.params.id })
 
-        res.status(data.deletedCount ? 204 : 404).send({
+        res.status(result.deletedCount ? 204 : 404).send({
             error: true,
             message: 'Something went wrong, data might be deleted already.'
         })
