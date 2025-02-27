@@ -138,7 +138,7 @@ module.exports = {
             {runValidators:true}
           )
 
-        if (result.matchedCount > 0 && result.modifiedCount === 0) {
+        if (data.matchedCount > 0 && data.modifiedCount === 0) {
           return res.status(200).send({ message: "Document already up-to-date." });
         }
 

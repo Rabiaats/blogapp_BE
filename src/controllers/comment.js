@@ -96,7 +96,7 @@ module.exports = {
             }
         */
 
-        const result = await Comment.findOneAndUpdate({ _id: req.params.id }, req.body, { runValidators: true })
+        const result = await Comment.findOneAndUpdate({ _id: req.params.id, userId: req.user_id }, req.body, { runValidators: true })
 
         if (!result) {
             return res.status(404).send({
@@ -118,7 +118,7 @@ module.exports = {
             #swagger.summary = "Delete Single Comment"
         */
 
-        const result = await Comment.findOneAndDelete({ _id: req.params.id })
+        const result = await Comment.findOneAndDelete({ _id: req.params.id, userId: req.user_id })
 
         if (!result) {
             return res.status(404).send({
