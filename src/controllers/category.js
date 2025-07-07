@@ -66,8 +66,7 @@ module.exports = {
 
         res.status(202).send({
             error: false,
-            result,
-            new: await Category.findOne({ _id: req.params.id })
+            result: await Category.findOne({ _id: req.params.id })
         })
     },
 

@@ -96,7 +96,7 @@ module.exports = {
             }
         */
 
-        const result = await Comment.findOneAndUpdate({ _id: req.params.id, userId: req.user_id }, req.body, { runValidators: true })
+        const result = await Comment.findOneAndUpdate({ _id: req.params.id, userId: req.user_id }, req.body, { new: true ,runValidators: true })
 
         if (!result) {
             return res.status(404).send({

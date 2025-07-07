@@ -118,49 +118,59 @@ module.exports = {
     },
 
     update: async (req, res) => {
-        /*
-            #swagger.tags = ["Blogs"]
-            #swagger.summary = "Update Blog"
-            #swagger.parameters['body'] = {
-                in: 'body',
-                required: true,
-                schema: {
-                    $ref"#/definitions/Blog"
-                    }
-            }
-        */
+  /*
+      #swagger.tags = ["Blogs"]
+      #swagger.summary = "Update Blog"
+      #swagger.parameters['body'] = {
+          in: 'body',
+          required: true,
+          schema: {
+              $ref: "#/definitions/Blog"
+          }
+      }
+  */
 
-        if (!req.user.isAdmin) req.body.userId = req.user._id;
+  if (!req.user.isAdmin) {
+    req.body.userId = req.user._id;
+  }
 
-        const data = await Blog.updateOne(
-            { _id: req.params.id },
-            req.body,
-            {runValidators:true}
-          )
+  try {
+    const result = await Blog.findOneAndUpdate(
+      { _id: req.params.id },
+      req.body,
+      {
+        new: true, // Güncellenmiş veriyi döndür
+        runValidators: true, // Schema doğrulamalarını çalıştır
+      }
+    ).populate([
+      {
+        path: "userId",
+        select: "username firstName lastName image",
+      },
+      {
+        path: "comments",
+        select: "_id comment blogId updatedAt",
+        populate: {
+          path: "userId",
+          select: "username firstName lastName image",
+        },
+      },
+    ]);
 
-        if (data.matchedCount > 0 && data.modifiedCount === 0) {
-          return res.status(200).send({ message: "Document already up-to-date." });
-        }
+    if (!result) {
+      return res.status(404).send({ isError: true, message: "Blog not found." });
+    }
 
-        res.status(202).send({
-            isError: false,
-            data,
-            result: await Blog.findOne({ _id: req.params.id }).populate([
-              {
-                path: "userId",
-                select: "username firstName lastName image",
-              },
-              {
-                path: "comments",
-                select: "_id comment blogId updatedAt",
-                populate: {
-                  path: "userId",
-                  select: "username firstName lastName image",
-                },
-              }
-            ]),
-        });
-    },
+    res.status(202).send({
+      isError: false,
+      result
+    });
+
+  } catch (error) {
+    res.status(500).send({ isError: true, message: error.message });
+  }
+},
+
 
     deletee: async (req, res) => {
          /*

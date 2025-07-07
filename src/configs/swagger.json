@@ -410,22 +410,21 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "userId": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/Blog"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -468,22 +467,21 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "userId": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/Blog"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
